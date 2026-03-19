@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Prime | Secure Acces Gate</title>
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --neon-red: #ff003c;
+            --bg-dark: #050505;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+        }
+
+        /* الستايل القديم: الصندوق بحدود متحركة */
+        .login-box {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 50px 40px;
+            border-radius: 20px;
+            width: 380px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+        }
+
+        /* حركة النيون اللي بتلف حول الصندوق */
+        .login-box::before {
+            content: '';
+            position: absolute;
+            top: -3px; left: -3px; right: -3px; bottom: -3px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-blue), var(--neon-purple));
+            background-size: 300%;
+            z-index: -1;
+            border-radius: 23px;
+            animation: rotate-border 4s linear infinite;
+        }
+
+        @keyframes rotate-border {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        h2 {
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            color: white;
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 11px;
+            color: #777;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.4s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 2px solid var(--neon-purple);
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.5s;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: var(--neon-purple);
+            box-shadow: 0 0 30px var(--neon-purple);
+        }
+
+        #error-msg {
+            color: var(--neon-red);
+            font-size: 12px;
+            margin-top: 15px;
+            display: none;
+            text-shadow: 0 0 8px var(--neon-red);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2/>Admin system</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label>ADMIN USERNAME</label>
+                <input type="text" id="username" placeholder="Enter Username" required>
+            </div>
+            
+            <div class="input-group">
+                <label>ACCESS PASSWORD</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="login-btn">Initialize Session</button>
+            <p id="error-msg">ACCESS DENIED: INVALID KEY</p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // بيانات الدخول الخاصة بك يا ساهر
+            const adminUser = "Nova Prime"; 
+            const adminPass = "Nova1234"; 
+
+            const userIn = document.getElementById('username').value;
+            const passIn = document.getElementById('password').value;
+            const error = document.getElementById('error-msg');
+
+            if (userIn === adminUser && passIn === adminPass) {
+          
+                window.location.href =  "https://boston225.github.io/Admin-/"; 
+            } else {
+                error.style.display = "block";
+                document.getElementById('password').value = "";
+                setTimeout(() => { error.style.display = "none"; }, 3000);
+            }
+        });
+    </script>
+
+</body>
+</html>
